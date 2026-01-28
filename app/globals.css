@@ -1,0 +1,55 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+* {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-off-white text-body text-text-primary antialiased;
+}
+
+main {
+  min-height: 60vh;
+}
+
+
+::selection {
+  background: rgba(20, 184, 166, 0.18);
+}
+
+.focus-ring {
+  @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal focus-visible:ring-offset-2 focus-visible:ring-offset-white;
+}
+
+.hero-glow {
+  background: radial-gradient(circle at top left, rgba(28, 197, 167, 0.14), transparent 55%),
+    radial-gradient(circle at 20% 30%, rgba(9, 54, 85, 0.2), transparent 45%);
+}
+
+.section-grid {
+  background-image: linear-gradient(to right, rgba(9, 54, 85, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(9, 54, 85, 0.05) 1px, transparent 1px);
+  background-size: 72px 72px;
+}
+
+.btn-primary {
+  @apply inline-flex h-11 items-center justify-center rounded-xl bg-teal px-6 text-body font-semibold text-text-primary shadow-soft transition hover:opacity-90 focus-ring;
+}
+
+.btn-secondary {
+  @apply inline-flex h-11 items-center justify-center rounded-xl bg-navy px-6 text-body font-semibold text-white shadow-soft transition hover:opacity-90 focus-ring;
+}
+
+.btn-outline {
+  @apply inline-flex h-11 items-center justify-center rounded-xl border border-border-muted/30 bg-white px-6 text-body font-semibold text-text-primary shadow-soft transition hover:border-border-muted/60 focus-ring;
+}
+
+.card-base {
+  @apply rounded-2xl border border-border-muted/20 bg-white shadow-card;
+}
