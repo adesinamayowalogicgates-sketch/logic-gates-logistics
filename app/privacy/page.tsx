@@ -34,8 +34,13 @@ export default function PrivacyPage() {
               with regulatory requirements.
             </p>
             <p className="mt-4">
-              A full privacy policy will be published at launch. For questions,
-              contact our team.
+              We may share data with vetted fleet partners solely for trip
+              execution. Payment processing details are handled through approved
+              providers and are not stored on our systems.
+            </p>
+            <p className="mt-4">
+              Customers may request updates or deletion of personal data where
+              legally permitted. Contact our team for privacy requests.
             </p>
           </div>
         </div>

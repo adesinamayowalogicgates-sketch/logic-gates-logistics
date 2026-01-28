@@ -8,7 +8,6 @@ const footerLinks = [
   { label: "Business", href: "/business" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
-  { label: "Support", href: "/support" },
   { label: "Terms", href: "/terms" },
   { label: "Privacy", href: "/privacy" }
 ];

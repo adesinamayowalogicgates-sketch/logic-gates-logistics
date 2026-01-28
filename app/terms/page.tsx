@@ -30,13 +30,19 @@ export default function TermsPage() {
             </p>
             <p className="mt-4">
               We reserve the right to adjust routes based on safety and traffic
-              conditions across Nigeria. Clients are responsible for providing
-              accurate pickup details and ensuring passengers comply with safety
-              instructions.
+              conditions across the South-West. Clients are responsible for
+              providing accurate pickup details and ensuring passengers comply
+              with safety instructions.
             </p>
             <p className="mt-4">
-              Full terms will be published upon launch. Contact our team for
-              additional contractual details.
+              Pricing is confirmed in writing before service. Business accounts
+              may receive customized service agreements covering recurring
+              routes, fleet assignment, and dedicated coordinators.
+            </p>
+            <p className="mt-4">
+              Late pickups due to incorrect details, last-minute changes, or
+              extended wait times may incur additional charges. We will notify
+              clients before any adjustments are applied.
             </p>
           </div>
         </div>

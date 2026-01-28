@@ -36,6 +36,37 @@ export default function SafetyPage() {
               </div>
             ))}
           </div>
+          <div className="mt-10 grid gap-6 md:grid-cols-2">
+            {[
+              {
+                title: "Insurance coverage",
+                detail:
+                  "Trips are covered under partner vehicle insurance and verified documentation."
+              },
+              {
+                title: "Licensed operations",
+                detail:
+                  "We work with registered transport providers and verified fleet owners."
+              },
+              {
+                title: "Escalation protocols",
+                detail:
+                  "Dedicated response team coordinates incident handling and rerouting."
+              },
+              {
+                title: "Client privacy",
+                detail:
+                  "Trip data is restricted to operations staff and retained securely."
+              }
+            ].map((item) => (
+              <div key={item.title} className="card-base p-6">
+                <p className="text-body font-semibold text-text-primary">
+                  {item.title}
+                </p>
+                <p className="mt-3 text-body text-muted">{item.detail}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
     </div>

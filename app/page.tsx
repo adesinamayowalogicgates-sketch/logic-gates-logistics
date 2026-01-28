@@ -113,6 +113,42 @@ export default function HomePage() {
       </section>
 
       <section className="bg-off-white">
+        <div className="mx-auto w-full max-w-6xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
+          <SectionHeading
+            eyebrow="Trust"
+            title="Trusted by individuals and operational teams"
+            subtitle="We support executive travel, staff movement, and secure cargo runs across Lagos and the South-West."
+          />
+          <div className="mt-10 grid gap-6 md:grid-cols-3">
+            {[
+              {
+                quote:
+                  "Our airport pickups are always on time and our executive team feels safe.",
+                role: "Executive Assistant, Lagos"
+              },
+              {
+                quote:
+                  "The dispatch updates keep our staff shuttles predictable and stress-free.",
+                role: "Operations Lead, Ikeja"
+              },
+              {
+                quote:
+                  "Cargo deliveries were tracked end-to-end with clear reporting.",
+                role: "Supply Manager, Oyo"
+              }
+            ].map((item) => (
+              <div key={item.role} className="card-base p-6">
+                <p className="text-body text-muted">"{item.quote}"</p>
+                <p className="mt-4 text-body font-semibold text-text-primary">
+                  {item.role}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-off-white">
         <div className="mx-auto flex w-full max-w-6xl flex-col gap-10 px-4 py-12 sm:px-6 sm:py-16 lg:px-8 lg:flex-row lg:items-center">
           <div className="max-w-xl">
             <SectionHeading
@@ -145,6 +181,39 @@ export default function HomePage() {
 
               </Link>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-off-white">
+        <div className="mx-auto w-full max-w-6xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
+          <SectionHeading
+            eyebrow="Operations"
+            title="Clear response times and trip standards"
+            subtitle="We keep clients informed with dispatch updates, insurance coverage, and documented trip reporting."
+          />
+          <div className="mt-10 grid gap-6 md:grid-cols-3">
+            {[
+              {
+                title: "Response time",
+                detail: "Quotes within 2 business hours for standard requests."
+              },
+              {
+                title: "Service hours",
+                detail: "Trips scheduled daily, with priority coverage in Lagos."
+              },
+              {
+                title: "Cancellation window",
+                detail: "Notify us 24 hours ahead to avoid late cancellation fees."
+              }
+            ].map((item) => (
+              <div key={item.title} className="card-base p-6">
+                <p className="text-body font-semibold text-text-primary">
+                  {item.title}
+                </p>
+                <p className="mt-3 text-body text-muted">{item.detail}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>

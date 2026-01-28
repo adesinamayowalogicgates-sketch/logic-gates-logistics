@@ -36,6 +36,37 @@ export default function BusinessPage() {
               </div>
             ))}
           </div>
+          <div className="mt-10 grid gap-6 md:grid-cols-2">
+            {[
+              {
+                title: "Business onboarding",
+                detail:
+                  "Share your routes, passenger counts, and preferred vehicles for a tailored fleet plan."
+              },
+              {
+                title: "Service level agreement",
+                detail:
+                  "Priority dispatch, dedicated coordinators, and reporting for recurring schedules."
+              },
+              {
+                title: "Billing & compliance",
+                detail:
+                  "Clear invoicing, trip logs, and route-level accountability for audits."
+              },
+              {
+                title: "Emergency response",
+                detail:
+                  "Escalation-ready team for reroutes, delays, or incident management."
+              }
+            ].map((item) => (
+              <div key={item.title} className="card-base p-6">
+                <p className="text-body font-semibold text-text-primary">
+                  {item.title}
+                </p>
+                <p className="mt-3 text-body text-muted">{item.detail}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 

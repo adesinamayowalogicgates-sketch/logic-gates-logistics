@@ -9,6 +9,7 @@ interface ContactFormState {
   subject: string;
   message: string;
   isBusiness: boolean;
+  website: string;
 }
 
 const initialState: ContactFormState = {
@@ -17,7 +18,8 @@ const initialState: ContactFormState = {
   phone: "",
   subject: "",
   message: "",
-  isBusiness: false
+  isBusiness: false,
+  website: ""
 };
 
 export default function ContactForm() {
@@ -175,6 +177,18 @@ export default function ContactForm() {
         {errors.message ? (
           <p className="mt-2 text-xs text-red-500">{errors.message}</p>
         ) : null}
+      </div>
+
+      <div className="hidden">
+        <label htmlFor="contact-website">Website</label>
+        <input
+          id="contact-website"
+          name="website"
+          value={form.website}
+          onChange={handleChange}
+          tabIndex={-1}
+          autoComplete="off"
+        />
       </div>
 
       <label className="mt-6 flex items-center gap-3 text-body text-muted">
