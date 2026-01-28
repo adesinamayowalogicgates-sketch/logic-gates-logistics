@@ -81,10 +81,7 @@ export default async function BookingDetailPage({ params }: Params) {
               <span>Base price</span>
               <span>NGN {breakdown?.basePrice?.toLocaleString()}</span>
             </div>
-            <div className="flex items-center justify-between">
-              <span>Vehicle multiplier</span>
-              <span>x{breakdown?.multiplier}</span>
-            </div>
+            
             <div className="flex items-center justify-between">
               <span>Security fee</span>
               <span>NGN {breakdown?.securityFee?.toLocaleString()}</span>
