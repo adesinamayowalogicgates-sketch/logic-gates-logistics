@@ -83,6 +83,14 @@ export default function Navbar() {
               </Link>
             ))}
             <Link
+              href="/app/login"
+              className={`text-body font-semibold transition focus-ring ${
+                isScrolled ? "text-white/80 hover:text-white" : "text-text-primary"
+              }`}
+            >
+              Customer login
+            </Link>
+            <Link
               href="/request-quote"
               className="btn-primary"
             >
@@ -121,6 +129,13 @@ export default function Navbar() {
                 {link.label}
               </Link>
             ))}
+            <Link
+              href="/app/login"
+              className="rounded-lg px-3 py-3 text-body text-text-primary transition hover:bg-off-white focus-ring"
+              onClick={() => setIsOpen(false)}
+            >
+              Customer login
+            </Link>
             <Link
               href="/request-quote"
               className="btn-primary w-full"

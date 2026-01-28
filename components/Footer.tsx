@@ -8,6 +8,7 @@ const footerLinks = [
   { label: "Business", href: "/business" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
+  { label: "Customer Portal", href: "/app/login" },
   { label: "Terms", href: "/terms" },
   { label: "Privacy", href: "/privacy" }
 ];

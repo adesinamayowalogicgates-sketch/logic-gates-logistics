@@ -1,0 +1,72 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+
+
+
+model User {
+  id            String              @id @default(cuid())
+  name          String
+  email         String              @unique
+  phone         String
+  company       String?
+  passwordHash  String
+  role          String              @default("customer")
+  walletBalance Int                 @default(0)
+  bookings      Booking[]
+  transactions  WalletTransaction[]
+  createdAt     DateTime            @default(now())
+  updatedAt     DateTime            @updatedAt
+}
+
+model Booking {
+  id               String        @id @default(cuid())
+  userId           String
+  user             User          @relation(fields: [userId], references: [id])
+  serviceType      String
+  pickupLocation   String
+  dropoffLocation  String
+  pickupTime       DateTime
+  passengers       Int
+  vehicleType      String
+  notes            String?
+  securityRequired Boolean       @default(false)
+  securityQty      Int           @default(0)
+  status          String          @default("DRAFT")
+  paymentStatus   String          @default("UNPAID")
+  paymentMethod   String?
+  priceBreakdown  String          @default("{}")
+  overrideAmount  Int?
+  overrideReason  String?
+  driverName      String?
+  driverPhone     String?
+  vehicleLabel    String?
+  securityAssigned Boolean        @default(false)
+  securityNotes   String?
+ 
+  paymentReference String?
+  paymentAmount    Int?
+  createdAt        DateTime      @default(now())
+  updatedAt        DateTime      @updatedAt
+  transactions     WalletTransaction[]
+}
+
+model WalletTransaction {
+  id        String                 @id @default(cuid())
+  userId    String
+  user      User                   @relation(fields: [userId], references: [id])
+  bookingId String?
+  booking   Booking?               @relation(fields: [bookingId], references: [id])
+  type      String 
+  amount    Int
+  source    String
+  reference String?
+  note      String?
+  createdAt DateTime               @default(now())
+}

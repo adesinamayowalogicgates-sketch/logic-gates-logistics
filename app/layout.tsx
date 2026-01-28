@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Navbar, { NAV_HEIGHT } from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import { siteMeta } from "@/lib/site";
 
 const inter = Inter({
@@ -50,16 +48,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={inter.variable}>
-      <body
-        className="font-sans"
-        style={{
-          fontFamily: "var(--font-sans)",
-          scrollPaddingTop: NAV_HEIGHT
-        }}
-      >
-        <Navbar />
-        <main className="pt-[72px]">{children}</main>
-        <Footer />
+      <body className="font-sans" style={{ fontFamily: "var(--font-sans)" }}>
+        {children}
       </body>
     </html>
   );
