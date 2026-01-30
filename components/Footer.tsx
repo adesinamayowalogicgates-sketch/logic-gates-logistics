@@ -58,6 +58,9 @@ export default function Footer() {
                 </li>
               ))}
             </ul>
+            <Link href="/admin/login" className="btn-outline mt-4 inline-flex">
+              Admin Portal
+            </Link>
           </div>
 
           <div>
