@@ -5,6 +5,10 @@ import { getToken } from "next-auth/jwt";
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
+  if (pathname === "/admin/login") {
+    return NextResponse.next();
+  }
+
   if (pathname.startsWith("/app") || pathname.startsWith("/admin")) {
     const token = await getToken({
       req: request,
@@ -22,15 +26,23 @@ export async function middleware(request: NextRequest) {
 
     if (!token) {
       const url = request.nextUrl.clone();
-      url.pathname = "/app/login";
+      url.pathname = pathname.startsWith("/admin") ? "/admin/login" : "/app/login";
       return NextResponse.redirect(url);
     }
 
     if (pathname.startsWith("/admin")) {
+      const email = (token.email as string | undefined) ?? "";
+      if (!email.toLowerCase().endsWith("@logicgatesindustries.com")) {
+        const url = request.nextUrl.clone();
+        url.pathname = "/app";
+        url.search = "error=admin_domain_required";
+        return NextResponse.redirect(url);
+      }
       const role = (token.role as string | undefined)?.toLowerCase();
       if (role !== "admin" && role !== "ops") {
         const url = request.nextUrl.clone();
         url.pathname = "/app";
+        url.search = "error=not_authorized";
         return NextResponse.redirect(url);
       }
     }
