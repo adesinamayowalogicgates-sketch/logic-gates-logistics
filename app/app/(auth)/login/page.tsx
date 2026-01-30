@@ -40,6 +40,9 @@ export default function LoginPage() {
 
   return (
     <div className="mx-auto w-full max-w-md rounded-2xl border border-border-muted/20 bg-white p-6">
+      <Link href="/" className="text-body text-text-primary underline">
+        ← Back to home
+      </Link>
       <h1 className="text-h1 font-semibold text-text-primary">Customer login</h1>
       <p className="mt-2 text-body text-muted">
         Access your bookings, wallet balance, and trip updates.

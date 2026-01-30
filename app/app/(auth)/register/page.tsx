@@ -43,6 +43,9 @@ export default function RegisterPage() {
 
   return (
     <div className="mx-auto w-full max-w-md rounded-2xl border border-border-muted/20 bg-white p-6">
+      <Link href="/" className="text-body text-text-primary underline">
+        ← Back to home
+      </Link>
       <h1 className="text-h1 font-semibold text-text-primary">Create account</h1>
       <p className="mt-2 text-body text-muted">
         Register to manage bookings across Lagos and the South-West.
