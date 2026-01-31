@@ -14,7 +14,7 @@ export default async function AdminLoginPage() {
 
   return (
     <div className="mx-auto w-full max-w-md rounded-2xl border border-border-muted/20 bg-white p-6">
-      <h1 className="text-h1 font-semibold text-text-primary">Admin Login</h1>
+      <h1 className="text-h1 font-semibold text-text-primary">Admin login</h1>
       <p className="mt-2 text-body text-muted">
         Sign in with your Logic Gates Industries admin account.
       </p>
