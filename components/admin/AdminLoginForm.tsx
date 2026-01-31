@@ -38,7 +38,8 @@ export default function AdminLoginForm() {
     const role = (session?.user?.role as string | undefined)?.toLowerCase() || "";
 
     if (sessionEmail.endsWith("@logicgatesindustries.com") && (role === "admin" || role === "ops")) {
-    router.push("/admin");
+    router.push("/admin/dashboard");
+
       return;
     }
 
