@@ -33,11 +33,12 @@ export default function AdminLoginForm() {
 
     const sessionResponse = await fetch("/api/auth/session");
     const session = await sessionResponse.json();
-    const email = (session?.user?.email as string | undefined)?.toLowerCase() || "";
+    const sessionEmail = (session?.user?.email as string | undefined)?.toLowerCase() || "";
+
     const role = (session?.user?.role as string | undefined)?.toLowerCase() || "";
 
-    if (email.endsWith("@logicgatesindustries.com") && (role === "admin" || role === "ops")) {
-      router.push("/admin");
+    if (sessionEmail.endsWith("@logicgatesindustries.com") && (role === "admin" || role === "ops")) {
+    router.push("/admin");
       return;
     }
 
