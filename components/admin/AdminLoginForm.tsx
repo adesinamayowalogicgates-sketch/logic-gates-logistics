@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { signIn, signOut } from "next-auth/react";
+import { signIn } from "next-auth/react";
 
 export default function AdminLoginForm() {
   const router = useRouter();
@@ -31,20 +31,11 @@ export default function AdminLoginForm() {
       return;
     }
 
-    const sessionResponse = await fetch("/api/auth/session");
-    const session = await sessionResponse.json();
-    const sessionEmail = (session?.user?.email as string | undefined)?.toLowerCase() || "";
 
-    const role = (session?.user?.role as string | undefined)?.toLowerCase() || "";
+    router.replace("/admin/dashboard");
+    router.refresh();
+    return;
 
-    if (sessionEmail.endsWith("@logicgatesindustries.com") && (role === "admin" || role === "ops")) {
-    router.push("/admin/dashboard");
-
-      return;
-    }
-
-    await signOut({ redirect: false });
-    setError("Not authorized for admin access.");
   };
 
   return (
