@@ -31,8 +31,6 @@ export default function AdminLoginForm() {
       return;
     }
 
-<<<<<<< HEAD
-
     const sessionResponse = await fetch("/api/auth/session", { cache: "no-store" });
     const session = await sessionResponse.json();
     const sessionEmail = (session?.user?.email as string | undefined)?.toLowerCase() || "";
@@ -46,21 +44,6 @@ export default function AdminLoginForm() {
 
     await signOut({ redirect: false });
     setError("Not authorized for admin access.");
-
-=======
-    for (let attempt = 0; attempt < 10; attempt += 1) {
-      const response = await fetch("/api/auth/session", { cache: "no-store" });
-      const session = await response.json();
-      if (session?.user?.email) {
-        router.replace("/admin/dashboard");
-        router.refresh();
-        return;
-      }
-      await new Promise((resolve) => setTimeout(resolve, 250));
-    }
-
-    setError("Session not ready. Please try again.");
->>>>>>> 66a3795 (Fix admin login race condition)
   };
 
   return (
