@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import SectionHeading from "@/components/SectionHeading";
 
 export const metadata: Metadata = {
@@ -22,6 +23,17 @@ export default function SafetyPage() {
 
       <section>
         <div className="mx-auto w-full max-w-5xl px-4 pb-20 sm:px-6 lg:px-8">
+          <div className="mb-8 overflow-hidden rounded-2xl">
+            <div className="relative h-48 w-full">
+              <Image
+                src="/service-security.png"
+                alt="Security escort"
+                fill
+                className="object-cover"
+              />
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-navy/35 via-transparent to-transparent" />
+            </div>
+          </div>
           <div className="grid gap-6 md:grid-cols-2">
             {[
               "Driver background checks and reference validation in Nigeria.",
@@ -31,7 +43,7 @@ export default function SafetyPage() {
               "Dedicated support desk for rapid coordination or emergencies.",
               "Vehicle maintenance logs reviewed before every assignment."
             ].map((item) => (
-              <div key={item} className="card-base p-6">
+              <div key={item} className="card-base p-6 transition duration-200 ease-out hover:-translate-y-1 hover:shadow-soft">
                 <p className="text-body font-semibold text-text-primary">{item}</p>
               </div>
             ))}
@@ -59,7 +71,7 @@ export default function SafetyPage() {
                   "Trip data is restricted to operations staff and retained securely."
               }
             ].map((item) => (
-              <div key={item.title} className="card-base p-6">
+              <div key={item.title} className="card-base p-6 transition duration-200 ease-out hover:-translate-y-1 hover:shadow-soft">
                 <p className="text-body font-semibold text-text-primary">
                   {item.title}
                 </p>

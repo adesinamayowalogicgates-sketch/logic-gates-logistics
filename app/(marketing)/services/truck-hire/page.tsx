@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import SectionHeading from "@/components/SectionHeading";
 import { pricingTable } from "@/lib/constants";
@@ -24,7 +25,18 @@ export default function TruckHirePage() {
 
       <section>
         <div className="mx-auto w-full max-w-5xl px-4 pb-12 sm:pb-16 sm:px-6 lg:px-8">
-          <div className="mb-8 rounded-2xl border border-border-muted/20 bg-off-white p-6">
+          <div className="mb-8 overflow-hidden rounded-2xl">
+            <div className="relative h-48 w-full">
+              <Image
+                src="/service-truck.png"
+                alt="Truck hire"
+                fill
+                className="object-cover"
+              />
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-navy/35 via-transparent to-transparent" />
+            </div>
+          </div>
+          <div className="mb-8 rounded-2xl border border-border-muted/20 bg-off-white p-6 transition duration-200 ease-out hover:-translate-y-1 hover:border-teal/40 hover:shadow-soft">
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-teal">
               Pricing hint
             </p>
@@ -56,7 +68,7 @@ export default function TruckHirePage() {
                   "Warehouse-to-branch transfer runs"
                 ].map((item) => (
                   <li key={item} className="flex items-start gap-2">
-                    <span className="mt-1 h-2 w-2 rounded-full bg-teal"></span>
+                    <span className="mt-1 h-2 w-2 rounded-full bg-teal/80"></span>
                     <span>{item}</span>
                   </li>
                 ))}
@@ -70,7 +82,7 @@ export default function TruckHirePage() {
               "Compliance-focused drivers with cargo handling training.",
               "Optional security escort for high-value shipments."
             ].map((item) => (
-              <div key={item} className="card-base p-6">
+              <div key={item} className="card-base p-6 transition duration-200 ease-out hover:-translate-y-1 hover:shadow-soft">
                 <p className="text-body font-semibold text-text-primary">{item}</p>
               </div>
             ))}
@@ -78,13 +90,13 @@ export default function TruckHirePage() {
           <div className="mt-10 flex flex-col gap-4 sm:flex-row">
             <Link
               href="/request-quote"
-              className="btn-primary w-full sm:w-auto"
+              className="btn-primary w-full sm:w-auto shadow-soft transition duration-200 hover:shadow-md hover:brightness-105 active:translate-y-[1px] focus-ring"
             >
               Request a Quote
             </Link>
             <Link
               href="/services"
-              className="btn-outline w-full sm:w-auto"
+              className="btn-outline w-full sm:w-auto transition duration-200 hover:shadow-md active:translate-y-[1px] focus-ring"
             >
               Back to Services
             </Link>

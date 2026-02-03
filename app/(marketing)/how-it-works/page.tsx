@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import SectionHeading from "@/components/SectionHeading";
 
@@ -46,9 +47,20 @@ export default function HowItWorksPage() {
 
       <section>
         <div className="mx-auto w-full max-w-5xl px-4 pb-20 sm:px-6 lg:px-8">
+          <div className="mb-8 overflow-hidden rounded-2xl">
+            <div className="relative h-48 w-full">
+              <Image
+                src="/map-coverage.png"
+                alt="Coverage map"
+                fill
+                className="object-cover"
+              />
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-navy/35 via-transparent to-transparent" />
+            </div>
+          </div>
           <div className="grid gap-6 md:grid-cols-2">
             {steps.map((step, index) => (
-              <div key={step.title} className="card-base p-6">
+              <div key={step.title} className="card-base p-6 transition duration-200 ease-out hover:-translate-y-1 hover:shadow-soft">
                 <p className="text-xs font-semibold uppercase tracking-[0.2em] text-teal">
                   Step {index + 1}
                 </p>
@@ -64,7 +76,7 @@ export default function HowItWorksPage() {
           <div className="mt-10">
             <Link
               href="/request-quote"
-              className="btn-primary w-full sm:w-auto"
+              className="btn-primary w-full sm:w-auto shadow-soft transition duration-200 hover:shadow-md hover:brightness-105 active:translate-y-[1px] focus-ring"
             >
               Start a booking
             </Link>

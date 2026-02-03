@@ -38,6 +38,21 @@ main {
   background-size: 72px 72px;
 }
 
+.animate-fade-in {
+  animation: fade-in 0.8s ease-out forwards;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .btn-primary {
   @apply inline-flex h-11 items-center justify-center rounded-xl bg-teal px-6 text-body font-semibold text-text-primary shadow-soft transition hover:opacity-90 focus-ring;
 }

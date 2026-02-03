@@ -92,7 +92,7 @@ export default function Navbar() {
             </Link>
             <Link
               href="/request-quote"
-              className="btn-primary"
+              className="btn-primary shadow-soft transition duration-200 hover:shadow-md hover:brightness-105 active:translate-y-[1px] focus-ring"
             >
               Request a Quote
             </Link>
@@ -138,7 +138,7 @@ export default function Navbar() {
             </Link>
             <Link
               href="/request-quote"
-              className="btn-primary w-full"
+              className="btn-primary w-full shadow-soft transition duration-200 hover:shadow-md hover:brightness-105 active:translate-y-[1px] focus-ring"
               onClick={() => setIsOpen(false)}
             >
               Request a Quote

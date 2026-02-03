@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import SectionHeading from "@/components/SectionHeading";
 import ContactForm from "@/components/ContactForm";
 
@@ -26,7 +27,7 @@ export default function ContactPage() {
           <div className="grid gap-6 lg:grid-cols-[1.1fr_1fr]">
             <ContactForm />
             <div className="space-y-6">
-              <div className="card-base p-6">
+              <div className="card-base p-6 transition duration-200 ease-out hover:-translate-y-1 hover:shadow-soft">
                 <h3 className="text-h1 font-semibold text-text-primary">
                   Company details
                 </h3>
@@ -36,7 +37,7 @@ export default function ContactPage() {
                   <p>Lagos, Nigeria</p>
                 </div>
               </div>
-              <div className="card-base p-6">
+              <div className="card-base p-6 transition duration-200 ease-out hover:-translate-y-1 hover:shadow-soft">
                 <h3 className="text-h1 font-semibold text-text-primary">
                   Service areas
                 </h3>
@@ -54,13 +55,13 @@ export default function ContactPage() {
                     "Ekiti"
                   ].map((area) => (
                     <li key={area} className="flex items-center gap-2">
-                      <span className="h-2 w-2 rounded-full bg-teal"></span>
+                      <span className="h-2 w-2 rounded-full bg-teal/80"></span>
                       <span>{area}</span>
                     </li>
                   ))}
                 </ul>
               </div>
-              <div className="card-base p-6">
+              <div className="card-base p-6 transition duration-200 ease-out hover:-translate-y-1 hover:shadow-soft">
                 <h3 className="text-h1 font-semibold text-text-primary">Response times</h3>
                 <p className="mt-3 text-body text-muted">
                   Our coordinators respond within two hours during business days
@@ -68,6 +69,17 @@ export default function ContactPage() {
                 </p>
                 <div className="mt-6 rounded-xl bg-off-white p-4 text-body text-muted">
                   Office hours: 8:00am - 8:00pm (Mon-Sat)
+                </div>
+              </div>
+              <div className="overflow-hidden rounded-2xl">
+                <div className="relative h-40 w-full">
+                  <Image
+                    src="/map-coverage.png"
+                    alt="Coverage map"
+                    fill
+                    className="object-cover"
+                  />
+                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-navy/35 via-transparent to-transparent" />
                 </div>
               </div>
             </div>

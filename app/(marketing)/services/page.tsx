@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import SectionHeading from "@/components/SectionHeading";
 import ServiceCard from "@/components/ServiceCard";
@@ -84,9 +85,23 @@ export default function ServicesPage() {
             title="Transparent hints, tailored quotes"
             subtitle="Final pricing depends on route distance, vehicle type, timing, and security needs. Request a quote for exact pricing."
           />
+          <div className="mt-8 overflow-hidden rounded-2xl">
+            <div className="relative h-48 w-full">
+              <Image
+                src="/map-coverage.png"
+                alt="Coverage map"
+                fill
+                className="object-cover"
+              />
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-navy/35 via-transparent to-transparent" />
+            </div>
+          </div>
           <div className="mt-8 grid gap-6 md:grid-cols-2">
             {serviceDetails.map((service) => (
-              <div key={service.title} className="rounded-2xl border border-border-muted/20 bg-off-white p-6">
+              <div
+                key={service.title}
+                className="rounded-2xl border border-border-muted/20 bg-off-white p-6 transition duration-200 ease-out hover:-translate-y-1 hover:border-teal/40 hover:shadow-soft"
+              >
                 <div className="flex items-center justify-between">
                   <h3 className="text-h1 font-semibold text-text-primary">
                     {service.title}
@@ -118,7 +133,7 @@ export default function ServicesPage() {
                 <ul className="mt-3 space-y-2 text-body text-muted">
                   {service.useCases.map((useCase) => (
                     <li key={useCase} className="flex items-start gap-2">
-                      <span className="mt-1 h-2 w-2 rounded-full bg-teal"></span>
+                      <span className="mt-1 h-2 w-2 rounded-full bg-teal/80"></span>
                       <span>{useCase}</span>
                     </li>
                   ))}
@@ -126,10 +141,10 @@ export default function ServicesPage() {
                 <div className="mt-5">
                   <Link
                     href="/request-quote"
-                    className="text-body font-semibold text-text-primary hover:opacity-80 focus-ring"
+                    className="group text-body font-semibold text-text-primary transition hover:underline hover:underline-offset-4 focus-ring"
                   >
-                  Request a quote →
-
+                    Request a quote{" "}
+                    <span className="inline-block transition group-hover:translate-x-1">→</span>
                   </Link>
                 </div>
               </div>

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import RequestQuoteForm from "@/components/RequestQuoteForm";
 
 export const metadata: Metadata = {
@@ -30,6 +31,17 @@ export default function RequestQuotePage() {
 
       <section>
         <div className="mx-auto w-full max-w-4xl px-4 pb-12 sm:pb-16 sm:px-6 lg:px-8">
+          <div className="mb-8 overflow-hidden rounded-2xl">
+            <div className="relative h-48 w-full">
+              <Image
+                src="/hero-transport.png"
+                alt="Logistics fleet"
+                fill
+                className="object-cover"
+              />
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-navy/35 via-transparent to-transparent" />
+            </div>
+          </div>
           <RequestQuoteForm />
         </div>
       </section>
