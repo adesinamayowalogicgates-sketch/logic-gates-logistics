@@ -2,16 +2,24 @@ import { z } from "zod";
 import { serviceTypes, vehicleTypesByService } from "@/lib/constants";
 
 export const registerSchema = z.object({
-  name: z.string().min(2),
+  name: z.string().min(2).optional(),
   email: z.string().email(),
-  phone: z.string().min(7),
+  phone: z.string().min(7).optional(),
   company: z.string().optional(),
   password: z.string().min(8)
-});
+}).passthrough();
 
 export const profileSchema = z.object({
   name: z.string().min(2),
+  firstName: z.string().min(2),
+  lastName: z.string().min(2),
+  gender: z.string().min(2),
+  dateOfBirth: z.string().min(4),
   phone: z.string().min(7),
+  nationality: z.string().min(2),
+  nextOfKinName: z.string().min(2),
+  nextOfKinGender: z.string().min(2),
+  nextOfKinPhone: z.string().min(7),
   company: z.string().optional()
 });
 

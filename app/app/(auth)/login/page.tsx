@@ -61,7 +61,7 @@ export default function LoginPage() {
             name="email"
             type="email"
             required
-            className="mt-2 w-full rounded-xl border border-border-muted/30 bg-white px-4 py-3 text-body text-text-primary focus-ring"
+            className="app-input"
           />
         </div>
         <div>
@@ -73,11 +73,11 @@ export default function LoginPage() {
             name="password"
             type="password"
             required
-            className="mt-2 w-full rounded-xl border border-border-muted/30 bg-white px-4 py-3 text-body text-text-primary focus-ring"
+            className="app-input"
           />
         </div>
         {error ? <p className="text-body text-red-500">{error}</p> : null}
-        <button className="btn-primary w-full shadow-soft transition duration-200 hover:shadow-md hover:brightness-105 active:translate-y-[1px] focus-ring" type="submit" disabled={loading}>
+        <button className="app-btn-primary w-full" type="submit" disabled={loading}>
           {loading ? "Signing in..." : "Sign in"}
         </button>
       </form>

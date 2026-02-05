@@ -23,11 +23,12 @@ export async function POST(request: Request) {
 
     const passwordHash = await hash(data.password, 10);
 
+    const rawPayload = payload as any;
     const user = await prisma.user.create({
       data: {
-        name: data.name,
+        name: data.name || rawPayload.name || "Admin",
         email: data.email,
-        phone: data.phone,
+        phone: data.phone || null,
         company: data.company || null,
         passwordHash,
         role: "admin"

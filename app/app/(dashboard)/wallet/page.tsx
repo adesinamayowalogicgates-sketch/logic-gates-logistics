@@ -23,7 +23,7 @@ export default async function WalletPage() {
         <p className="text-body text-muted">Track credits and payment records.</p>
       </div>
 
-      <div className="card-base p-6">
+      <div className="app-card p-6">
         <p className="text-body text-muted">Current balance</p>
         <p className="mt-3 text-h1 font-semibold text-text-primary">
           NGN {(user?.walletBalance ?? 0).toLocaleString()}
@@ -33,7 +33,7 @@ export default async function WalletPage() {
         </div>
       </div>
 
-      <div className="card-base p-6">
+      <div className="app-card p-6">
         <h2 className="text-h1 font-semibold text-text-primary">Transactions</h2>
         <div className="mt-4 space-y-3 text-body text-muted">
           {transactions.length ? (
@@ -56,7 +56,12 @@ export default async function WalletPage() {
               </div>
             ))
           ) : (
-            <p className="text-body text-muted">No transactions yet.</p>
+            <div className="flex items-center gap-3 rounded-2xl border border-dashed border-border-muted/40 bg-off-white/80 p-4 text-body text-muted">
+              <svg viewBox="0 0 24 24" className="h-5 w-5 text-teal" fill="none" stroke="currentColor" strokeWidth="1.5">
+                <path d="M6 7h12M6 12h12M6 17h12" />
+              </svg>
+              <span>No transactions yet.</span>
+            </div>
           )}
         </div>
       </div>

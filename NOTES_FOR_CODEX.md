@@ -9,6 +9,11 @@ PROJECT STATUS – LOGIC GATES LOGISTICS
 - Node_modules and .next removed from repo
 - Domain logicgatesindustries.com added to Vercel
 - DNS pending configuration on Dynadot (CNAME + A record)
+- Supabase pooler used for runtime DB connections
+
+DEV NOTE (Supabase schema updates):
+- If port 5432 (DIRECT_URL) is blocked, apply schema changes using Supabase SQL Editor.
+- Run: supabase/sql/add_profile_fields.sql to add profile columns.
 
 NEXT TASKS:
 1. Finish Dynadot DNS verification in Vercel
@@ -17,4 +22,3 @@ NEXT TASKS:
 4. Contact form backend verification
 5. Mobile spacing + typography final polish
 6. Analytics (Google Analytics / Search Console)
-

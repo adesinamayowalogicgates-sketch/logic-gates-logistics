@@ -42,9 +42,6 @@ export default async function BookingsPage({
             Track scheduled trips, payment status, and assigned drivers.
           </p>
         </div>
-        <Link href="/app/bookings/new" className="btn-primary">
-          New booking
-        </Link>
       </div>
 
       <div className="flex flex-wrap gap-3">
@@ -52,11 +49,7 @@ export default async function BookingsPage({
           <Link
             key={tab.value}
             href={`/app/bookings?filter=${tab.value}`}
-            className={`rounded-full px-4 py-2 text-body font-semibold transition focus-ring ${
-              filter === tab.value
-                ? "bg-navy text-white"
-                : "bg-white text-text-primary"
-            }`}
+            className={`app-tab ${filter === tab.value ? "app-tab-active" : ""}`}
           >
             {tab.label}
           </Link>
@@ -66,7 +59,7 @@ export default async function BookingsPage({
       <div className="space-y-4">
         {filtered.length ? (
           filtered.map((booking) => (
-            <div key={booking.id} className="card-base p-6">
+            <div key={booking.id} className="app-card app-card-hover p-6">
               <div className="flex flex-wrap items-center justify-between gap-3">
                 <div>
                   <p className="text-body font-semibold text-text-primary">
@@ -94,7 +87,17 @@ export default async function BookingsPage({
             </div>
           ))
         ) : (
-          <p className="text-body text-muted">No bookings to show yet.</p>
+          <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-dashed border-border-muted/40 bg-off-white/80 p-6 text-body text-muted">
+            <div className="flex items-center gap-3">
+              <svg viewBox="0 0 24 24" className="h-5 w-5 text-teal" fill="none" stroke="currentColor" strokeWidth="1.5">
+                <path d="M8 7V3m8 4V3M4 11h16M5 21h14a1 1 0 001-1v-9a1 1 0 00-1-1H5a1 1 0 00-1 1v9a1 1 0 001 1z" />
+              </svg>
+              <span>No bookings to show yet.</span>
+            </div>
+            <Link href="/app/bookings/new" className="app-btn-primary">
+              Create new booking
+            </Link>
+          </div>
         )}
       </div>
     </div>

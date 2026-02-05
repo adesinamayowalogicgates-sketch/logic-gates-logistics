@@ -68,3 +68,47 @@ main {
 .card-base {
   @apply rounded-2xl border border-border-muted/20 bg-white shadow-card;
 }
+
+.app-surface {
+  @apply bg-gradient-to-br from-off-white via-white to-off-white;
+}
+
+.app-card {
+  @apply rounded-2xl border border-border-muted/30 bg-white shadow-soft transition duration-200 ease-out;
+}
+
+.app-card-hover {
+  @apply hover:-translate-y-1 hover:shadow-card;
+}
+
+.app-btn-primary {
+  @apply inline-flex h-11 items-center justify-center rounded-full bg-gradient-to-r from-teal to-emerald-400 px-6 text-body font-semibold text-white shadow-soft transition duration-200 hover:shadow-md hover:brightness-105 active:translate-y-[1px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal/40 focus-visible:ring-offset-2 focus-visible:ring-offset-white;
+}
+
+.app-btn-secondary {
+  @apply inline-flex h-11 items-center justify-center rounded-full border border-border-muted/40 bg-white px-6 text-body font-semibold text-text-primary shadow-soft transition duration-200 hover:bg-off-white hover:shadow-md active:translate-y-[1px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal/40 focus-visible:ring-offset-2 focus-visible:ring-offset-white;
+}
+
+.app-tab {
+  @apply rounded-full bg-white px-4 py-2 text-body font-semibold text-text-primary transition duration-200 hover:bg-off-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal/40 focus-visible:ring-offset-2 focus-visible:ring-offset-white;
+}
+
+.app-tab-active {
+  @apply bg-navy text-white shadow-soft;
+}
+
+.app-input {
+  @apply mt-2 w-full rounded-xl border border-border-muted/40 bg-white px-4 py-3 text-body text-text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal/40 focus-visible:ring-offset-2 focus-visible:ring-offset-white;
+}
+
+.app-sidebar {
+  @apply rounded-2xl border border-border-muted/30 bg-white/90 shadow-soft;
+}
+
+.app-sidebar-item {
+  @apply block rounded-xl px-3 py-3 text-body text-text-primary transition duration-200 hover:bg-off-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal/40 focus-visible:ring-offset-2 focus-visible:ring-offset-white;
+}
+
+.app-sidebar-item-active {
+  @apply bg-teal/10 text-text-primary ring-1 ring-teal/30;
+}

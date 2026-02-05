@@ -18,18 +18,42 @@ export async function POST(request: Request) {
 
     const passwordHash = await hash(data.password, 10);
 
-    const user = await prisma.user.create({
-      data: {
-        name: data.name,
-        email: data.email,
-        phone: data.phone,
-        company: data.company || null,
-        passwordHash
+    const rawPayload = payload as any;
+    const baseData = {
+      name: data.name || rawPayload.name || "Customer",
+      email: data.email,
+      phone: typeof rawPayload.phone === "string" ? rawPayload.phone : null,
+      company: typeof rawPayload.company === "string" ? rawPayload.company : null,
+      passwordHash
+    };
+
+    const extendedData = {
+      ...baseData,
+      firstName: typeof rawPayload.firstName === "string" ? rawPayload.firstName : null,
+      lastName: typeof rawPayload.lastName === "string" ? rawPayload.lastName : null,
+      gender: typeof rawPayload.gender === "string" ? rawPayload.gender : null,
+      dateOfBirth: typeof rawPayload.dateOfBirth === "string" ? rawPayload.dateOfBirth : null,
+      nationality: typeof rawPayload.nationality === "string" ? rawPayload.nationality : null,
+      nextOfKinName: typeof rawPayload.nextOfKinName === "string" ? rawPayload.nextOfKinName : null,
+      nextOfKinGender: typeof rawPayload.nextOfKinGender === "string" ? rawPayload.nextOfKinGender : null,
+      nextOfKinPhone: typeof rawPayload.nextOfKinPhone === "string" ? rawPayload.nextOfKinPhone : null
+    };
+
+    let user;
+    try {
+      user = await prisma.user.create({ data: extendedData });
+    } catch (dbError: any) {
+      const message = dbError?.message || "";
+      if (message.includes("column") || message.includes("does not exist") || message.includes("Unknown field")) {
+        user = await prisma.user.create({ data: baseData });
+      } else {
+        throw dbError;
       }
-    });
+    }
 
     return NextResponse.json({ id: user.id });
   } catch (error: any) {
-    return NextResponse.json({ error: error.message ?? "Invalid request" }, { status: 400 });
+    const message = Array.isArray(error?.issues) ? error.issues[0]?.message : error.message;
+    return NextResponse.json({ error: message ?? "Invalid request" }, { status: 400 });
   }
 }

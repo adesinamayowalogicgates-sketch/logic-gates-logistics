@@ -17,9 +17,17 @@ export default function RegisterPage() {
     const formData = new FormData(event.currentTarget);
 
     const payload = {
-      name: formData.get("name"),
+      name: `${formData.get("firstName") ?? ""} ${formData.get("lastName") ?? ""}`.trim(),
+      firstName: formData.get("firstName"),
+      lastName: formData.get("lastName"),
+      gender: formData.get("gender"),
+      dateOfBirth: formData.get("dateOfBirth"),
       email: formData.get("email"),
       phone: formData.get("phone"),
+      nationality: formData.get("nationality"),
+      nextOfKinName: formData.get("nextOfKinName"),
+      nextOfKinGender: formData.get("nextOfKinGender"),
+      nextOfKinPhone: formData.get("nextOfKinPhone"),
       company: formData.get("company"),
       password: formData.get("password")
     };
@@ -56,14 +64,48 @@ export default function RegisterPage() {
 
       <form className="mt-6 space-y-4" onSubmit={handleSubmit}>
         <div>
-          <label className="text-body font-semibold text-text-primary" htmlFor="name">
-            Full name
+          <label className="text-body font-semibold text-text-primary" htmlFor="firstName">
+            First name
           </label>
           <input
-            id="name"
-            name="name"
+            id="firstName"
+            name="firstName"
             required
-            className="mt-2 w-full rounded-xl border border-border-muted/30 bg-white px-4 py-3 text-body text-text-primary focus-ring"
+            className="app-input"
+          />
+        </div>
+        <div>
+          <label className="text-body font-semibold text-text-primary" htmlFor="lastName">
+            Last name
+          </label>
+          <input
+            id="lastName"
+            name="lastName"
+            required
+            className="app-input"
+          />
+        </div>
+        <div>
+          <label className="text-body font-semibold text-text-primary" htmlFor="gender">
+            Gender
+          </label>
+          <input
+            id="gender"
+            name="gender"
+            required
+            className="app-input"
+          />
+        </div>
+        <div>
+          <label className="text-body font-semibold text-text-primary" htmlFor="dateOfBirth">
+            Date of birth
+          </label>
+          <input
+            id="dateOfBirth"
+            name="dateOfBirth"
+            type="date"
+            required
+            className="app-input"
           />
         </div>
         <div>
@@ -75,7 +117,7 @@ export default function RegisterPage() {
             name="email"
             type="email"
             required
-            className="mt-2 w-full rounded-xl border border-border-muted/30 bg-white px-4 py-3 text-body text-text-primary focus-ring"
+            className="app-input"
           />
         </div>
         <div>
@@ -86,7 +128,18 @@ export default function RegisterPage() {
             id="phone"
             name="phone"
             required
-            className="mt-2 w-full rounded-xl border border-border-muted/30 bg-white px-4 py-3 text-body text-text-primary focus-ring"
+            className="app-input"
+          />
+        </div>
+        <div>
+          <label className="text-body font-semibold text-text-primary" htmlFor="nationality">
+            Nationality
+          </label>
+          <input
+            id="nationality"
+            name="nationality"
+            required
+            className="app-input"
           />
         </div>
         <div>
@@ -96,7 +149,40 @@ export default function RegisterPage() {
           <input
             id="company"
             name="company"
-            className="mt-2 w-full rounded-xl border border-border-muted/30 bg-white px-4 py-3 text-body text-text-primary focus-ring"
+            className="app-input"
+          />
+        </div>
+        <div>
+          <label className="text-body font-semibold text-text-primary" htmlFor="nextOfKinName">
+            Next of kin name
+          </label>
+          <input
+            id="nextOfKinName"
+            name="nextOfKinName"
+            required
+            className="app-input"
+          />
+        </div>
+        <div>
+          <label className="text-body font-semibold text-text-primary" htmlFor="nextOfKinGender">
+            Next of kin gender
+          </label>
+          <input
+            id="nextOfKinGender"
+            name="nextOfKinGender"
+            required
+            className="app-input"
+          />
+        </div>
+        <div>
+          <label className="text-body font-semibold text-text-primary" htmlFor="nextOfKinPhone">
+            Next of kin phone number
+          </label>
+          <input
+            id="nextOfKinPhone"
+            name="nextOfKinPhone"
+            required
+            className="app-input"
           />
         </div>
         <div>
@@ -109,11 +195,11 @@ export default function RegisterPage() {
             type="password"
             required
             minLength={8}
-            className="mt-2 w-full rounded-xl border border-border-muted/30 bg-white px-4 py-3 text-body text-text-primary focus-ring"
+            className="app-input"
           />
         </div>
         {error ? <p className="text-body text-red-500">{error}</p> : null}
-        <button className="btn-primary w-full shadow-soft transition duration-200 hover:shadow-md hover:brightness-105 active:translate-y-[1px] focus-ring" type="submit" disabled={loading}>
+        <button className="app-btn-primary w-full" type="submit" disabled={loading}>
           {loading ? "Creating..." : "Create account"}
         </button>
       </form>

@@ -37,13 +37,13 @@ export default async function BookingDetailPage({ params }: Params) {
             {booking.serviceType} · {booking.vehicleType}
           </h1>
         </div>
-        <Link href="/app/bookings" className="btn-outline">
+        <Link href="/app/bookings" className="app-btn-secondary">
           Back to bookings
         </Link>
       </div>
 
       <div className="grid gap-6 lg:grid-cols-3">
-        <div className="card-base p-6 lg:col-span-2">
+        <div className="app-card p-6 lg:col-span-2">
           <h2 className="text-h1 font-semibold text-text-primary">Trip summary</h2>
           <div className="mt-4 grid gap-4 text-body text-muted">
             <div>
@@ -71,7 +71,7 @@ export default async function BookingDetailPage({ params }: Params) {
           </div>
         </div>
 
-        <div className="card-base p-6">
+        <div className="app-card p-6">
           <h2 className="text-h1 font-semibold text-text-primary">Payment</h2>
           <p className="mt-3 text-body text-muted">
             Status: {booking.paymentStatus.toLowerCase()}
@@ -99,14 +99,14 @@ export default async function BookingDetailPage({ params }: Params) {
           {booking.paymentStatus !== "PAID" ? (
             <Link
               href={`/app/checkout/${booking.id}`}
-              className="btn-primary mt-6 w-full"
+              className="app-btn-primary mt-6 w-full"
             >
               Pay now
             </Link>
           ) : (
             <Link
               href={`/app/checkout/success?reference=${booking.paymentReference}`}
-              className="btn-outline mt-6 w-full"
+              className="app-btn-secondary mt-6 w-full"
             >
               View receipt
             </Link>

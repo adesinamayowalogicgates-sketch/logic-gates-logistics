@@ -17,13 +17,13 @@ export default function AppHeader({ name }: AppHeaderProps) {
         </h1>
       </div>
       <div className="flex items-center gap-3">
-        <Link href="/app/bookings/new" className="btn-primary">
+        <Link href="/app/bookings/new" className="app-btn-primary">
           New booking
         </Link>
         <button
           type="button"
           onClick={() => signOut({ callbackUrl: "/app/login" })}
-          className="btn-outline"
+          className="app-btn-secondary"
         >
           Sign out
         </button>

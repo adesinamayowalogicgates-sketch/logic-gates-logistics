@@ -31,7 +31,7 @@ export default function PaystackPayButton({ bookingId }: { bookingId: string }) 
 
   return (
     <div>
-      <button type="button" className="btn-primary w-full" onClick={handlePay} disabled={loading}>
+      <button type="button" className="app-btn-primary w-full" onClick={handlePay} disabled={loading}>
         {loading ? "Redirecting..." : "Pay now"}
       </button>
       {error ? <p className="mt-3 text-body text-red-500">{error}</p> : null}

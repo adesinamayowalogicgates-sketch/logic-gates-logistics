@@ -21,7 +21,7 @@ export default async function CheckoutSuccessPage({
 
   return (
     <div className="mx-auto w-full max-w-xl space-y-6">
-      <div className="card-base p-6">
+      <div className="app-card p-6">
         <h1 className="text-h1 font-semibold text-text-primary">Payment received</h1>
         <p className="mt-2 text-body text-muted">
           {!reference
@@ -35,10 +35,10 @@ export default async function CheckoutSuccessPage({
           {amount ? <p>Amount: NGN {amount.toLocaleString()}</p> : null}
         </div>
         <div className="mt-6 flex flex-wrap gap-3">
-          <Link href="/app/bookings" className="btn-primary">
+          <Link href="/app/bookings" className="app-btn-primary">
             View bookings
           </Link>
-          <Link href="/app/dashboard" className="btn-outline">
+          <Link href="/app/dashboard" className="app-btn-secondary">
             Go to dashboard
           </Link>
         </div>

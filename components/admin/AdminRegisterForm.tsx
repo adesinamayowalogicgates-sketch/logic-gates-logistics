@@ -16,9 +16,17 @@ export default function AdminRegisterForm() {
     const formData = new FormData(event.currentTarget);
 
     const payload = {
-      name: formData.get("name"),
+      name: `${formData.get("firstName") ?? ""} ${formData.get("lastName") ?? ""}`.trim(),
+      firstName: formData.get("firstName"),
+      lastName: formData.get("lastName"),
+      gender: formData.get("gender"),
+      dateOfBirth: formData.get("dateOfBirth"),
       email: formData.get("email"),
       phone: formData.get("phone"),
+      nationality: formData.get("nationality"),
+      nextOfKinName: formData.get("nextOfKinName"),
+      nextOfKinGender: formData.get("nextOfKinGender"),
+      nextOfKinPhone: formData.get("nextOfKinPhone"),
       company: formData.get("company"),
       password: formData.get("password")
     };
@@ -43,12 +51,46 @@ export default function AdminRegisterForm() {
   return (
     <form className="mt-6 space-y-4" onSubmit={handleSubmit}>
       <div>
-        <label className="text-body font-semibold text-text-primary" htmlFor="name">
-          Full name
+        <label className="text-body font-semibold text-text-primary" htmlFor="firstName">
+          First name
         </label>
         <input
-          id="name"
-          name="name"
+          id="firstName"
+          name="firstName"
+          required
+          className="mt-2 w-full rounded-xl border border-border-muted/30 bg-white px-4 py-3 text-body text-text-primary focus-ring"
+        />
+      </div>
+      <div>
+        <label className="text-body font-semibold text-text-primary" htmlFor="lastName">
+          Last name
+        </label>
+        <input
+          id="lastName"
+          name="lastName"
+          required
+          className="mt-2 w-full rounded-xl border border-border-muted/30 bg-white px-4 py-3 text-body text-text-primary focus-ring"
+        />
+      </div>
+      <div>
+        <label className="text-body font-semibold text-text-primary" htmlFor="gender">
+          Gender
+        </label>
+        <input
+          id="gender"
+          name="gender"
+          required
+          className="mt-2 w-full rounded-xl border border-border-muted/30 bg-white px-4 py-3 text-body text-text-primary focus-ring"
+        />
+      </div>
+      <div>
+        <label className="text-body font-semibold text-text-primary" htmlFor="dateOfBirth">
+          Date of birth
+        </label>
+        <input
+          id="dateOfBirth"
+          name="dateOfBirth"
+          type="date"
           required
           className="mt-2 w-full rounded-xl border border-border-muted/30 bg-white px-4 py-3 text-body text-text-primary focus-ring"
         />
@@ -77,12 +119,56 @@ export default function AdminRegisterForm() {
         />
       </div>
       <div>
+        <label className="text-body font-semibold text-text-primary" htmlFor="nationality">
+          Nationality
+        </label>
+        <input
+          id="nationality"
+          name="nationality"
+          required
+          className="mt-2 w-full rounded-xl border border-border-muted/30 bg-white px-4 py-3 text-body text-text-primary focus-ring"
+        />
+      </div>
+      <div>
         <label className="text-body font-semibold text-text-primary" htmlFor="company">
           Company (optional)
         </label>
         <input
           id="company"
           name="company"
+          className="mt-2 w-full rounded-xl border border-border-muted/30 bg-white px-4 py-3 text-body text-text-primary focus-ring"
+        />
+      </div>
+      <div>
+        <label className="text-body font-semibold text-text-primary" htmlFor="nextOfKinName">
+          Next of kin name
+        </label>
+        <input
+          id="nextOfKinName"
+          name="nextOfKinName"
+          required
+          className="mt-2 w-full rounded-xl border border-border-muted/30 bg-white px-4 py-3 text-body text-text-primary focus-ring"
+        />
+      </div>
+      <div>
+        <label className="text-body font-semibold text-text-primary" htmlFor="nextOfKinGender">
+          Next of kin gender
+        </label>
+        <input
+          id="nextOfKinGender"
+          name="nextOfKinGender"
+          required
+          className="mt-2 w-full rounded-xl border border-border-muted/30 bg-white px-4 py-3 text-body text-text-primary focus-ring"
+        />
+      </div>
+      <div>
+        <label className="text-body font-semibold text-text-primary" htmlFor="nextOfKinPhone">
+          Next of kin phone number
+        </label>
+        <input
+          id="nextOfKinPhone"
+          name="nextOfKinPhone"
+          required
           className="mt-2 w-full rounded-xl border border-border-muted/30 bg-white px-4 py-3 text-body text-text-primary focus-ring"
         />
       </div>

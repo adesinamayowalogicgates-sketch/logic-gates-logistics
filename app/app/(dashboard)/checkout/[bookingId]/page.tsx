@@ -45,7 +45,7 @@ export default async function CheckoutPage({ params }: Params) {
         </h1>
       </div>
 
-      <div className="card-base p-6">
+      <div className="app-card p-6">
         <div className="space-y-3 text-body text-muted">
           <div className="flex items-center justify-between">
             <span>Base price</span>

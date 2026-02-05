@@ -16,7 +16,7 @@ export default function LogoutPage() {
         You will be redirected to the login page.
       </p>
       <div className="mt-6">
-        <Link href="/app/login" className="btn-outline w-full">
+        <Link href="/app/login" className="app-btn-secondary w-full">
           Return to login
         </Link>
       </div>

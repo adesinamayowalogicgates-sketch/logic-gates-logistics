@@ -46,7 +46,7 @@ export default function WalletPayButton({
     <div>
       <button
         type="button"
-        className={`w-full ${disabled ? "btn-outline opacity-60" : "btn-secondary"}`}
+        className={`w-full ${disabled ? "app-btn-secondary opacity-60" : "app-btn-secondary"}`}
         onClick={handlePay}
         disabled={loading || disabled}
       >

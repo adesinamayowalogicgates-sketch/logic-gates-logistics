@@ -27,7 +27,7 @@ export default async function DashboardPage() {
           { label: "Past", value: past.length },
           { label: "Total", value: bookings.length }
         ].map((item) => (
-          <div key={item.label} className="card-base p-6">
+          <div key={item.label} className="app-card app-card-hover p-6">
             <p className="text-body text-muted">{item.label}</p>
             <p className="mt-3 text-h1 font-semibold text-text-primary">
               {item.value}
@@ -36,10 +36,10 @@ export default async function DashboardPage() {
         ))}
       </div>
 
-      <div className="card-base p-6">
+      <div className="app-card p-6">
         <div className="flex items-center justify-between">
           <h2 className="text-h1 font-semibold text-text-primary">Upcoming bookings</h2>
-          <Link href="/app/bookings" className="text-body text-text-primary underline">
+          <Link href="/app/bookings" className="text-body font-semibold text-text-primary underline underline-offset-4">
             View all
           </Link>
         </div>
@@ -67,7 +67,12 @@ export default async function DashboardPage() {
               </div>
             ))
           ) : (
-            <p className="text-body text-muted">No upcoming bookings yet.</p>
+            <div className="flex items-center gap-3 rounded-2xl border border-dashed border-border-muted/40 bg-off-white/80 p-4 text-body text-muted">
+              <svg viewBox="0 0 24 24" className="h-5 w-5 text-teal" fill="none" stroke="currentColor" strokeWidth="1.5">
+                <path d="M8 7V3m8 4V3M4 11h16M5 21h14a1 1 0 001-1v-9a1 1 0 00-1-1H5a1 1 0 00-1 1v9a1 1 0 001 1z" />
+              </svg>
+              <span>No upcoming bookings yet.</span>
+            </div>
           )}
         </div>
       </div>

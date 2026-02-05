@@ -117,8 +117,8 @@ export default function NewBookingPage() {
         {steps.map((label, index) => (
           <div
             key={label}
-            className={`rounded-full px-4 py-2 text-body font-semibold ${
-              index === step ? "bg-navy text-white" : "bg-white text-text-primary"
+            className={`rounded-full px-4 py-2 text-body font-semibold transition duration-200 ${
+              index === step ? "bg-navy text-white shadow-soft" : "bg-white text-text-primary"
             }`}
           >
             {label}
@@ -126,12 +126,12 @@ export default function NewBookingPage() {
         ))}
       </div>
 
-      <div className="card-base p-6">
+      <div className="app-card p-6 transition duration-200 ease-out animate-fade-in">
         {step === 0 ? (
           <div className="space-y-4">
             <label className="text-body font-semibold text-text-primary">Service type</label>
             <select
-              className="w-full rounded-xl border border-border-muted/30 bg-white px-4 py-3 text-body text-text-primary focus-ring"
+              className="app-input"
               value={form.serviceType}
               onChange={(e) => {
                 update("serviceType", e.target.value);
@@ -146,7 +146,7 @@ export default function NewBookingPage() {
             </select>
             <label className="text-body font-semibold text-text-primary">Vehicle type</label>
             <select
-              className="w-full rounded-xl border border-border-muted/30 bg-white px-4 py-3 text-body text-text-primary focus-ring"
+              className="app-input"
               value={form.vehicleType}
               onChange={(e) => update("vehicleType", e.target.value)}
             >
@@ -165,7 +165,7 @@ export default function NewBookingPage() {
             <div>
               <label className="text-body font-semibold text-text-primary">Pickup location</label>
               <input
-                className="mt-2 w-full rounded-xl border border-border-muted/30 bg-white px-4 py-3 text-body text-text-primary focus-ring"
+                className="app-input"
                 value={form.pickupLocation}
                 onChange={(e) => update("pickupLocation", e.target.value)}
               />
@@ -173,7 +173,7 @@ export default function NewBookingPage() {
             <div>
               <label className="text-body font-semibold text-text-primary">Dropoff location</label>
               <input
-                className="mt-2 w-full rounded-xl border border-border-muted/30 bg-white px-4 py-3 text-body text-text-primary focus-ring"
+                className="app-input"
                 value={form.dropoffLocation}
                 onChange={(e) => update("dropoffLocation", e.target.value)}
               />
@@ -182,7 +182,7 @@ export default function NewBookingPage() {
               <label className="text-body font-semibold text-text-primary">Pickup date</label>
               <input
                 type="date"
-                className="mt-2 w-full rounded-xl border border-border-muted/30 bg-white px-4 py-3 text-body text-text-primary focus-ring"
+                className="app-input"
                 value={form.pickupDate}
                 onChange={(e) => update("pickupDate", e.target.value)}
               />
@@ -191,7 +191,7 @@ export default function NewBookingPage() {
               <label className="text-body font-semibold text-text-primary">Pickup time</label>
               <input
                 type="time"
-                className="mt-2 w-full rounded-xl border border-border-muted/30 bg-white px-4 py-3 text-body text-text-primary focus-ring"
+                className="app-input"
                 value={form.pickupTime}
                 onChange={(e) => update("pickupTime", e.target.value)}
               />
@@ -201,7 +201,7 @@ export default function NewBookingPage() {
               <input
                 type="number"
                 min={1}
-                className="mt-2 w-full rounded-xl border border-border-muted/30 bg-white px-4 py-3 text-body text-text-primary focus-ring"
+                className="app-input"
                 value={form.passengers}
                 onChange={(e) => update("passengers", Number(e.target.value))}
               />
@@ -210,7 +210,7 @@ export default function NewBookingPage() {
               <label className="text-body font-semibold text-text-primary">Notes (optional)</label>
               <textarea
                 rows={3}
-                className="mt-2 w-full rounded-xl border border-border-muted/30 bg-white px-4 py-3 text-body text-text-primary focus-ring"
+                className="app-input"
                 value={form.notes}
                 onChange={(e) => update("notes", e.target.value)}
               />
@@ -241,7 +241,7 @@ export default function NewBookingPage() {
                   type="number"
                   min={1}
                   max={5}
-                  className="mt-2 w-full rounded-xl border border-border-muted/30 bg-white px-4 py-3 text-body text-text-primary focus-ring"
+                  className="app-input"
                   value={form.securityQty}
                   onChange={(e) => update("securityQty", Number(e.target.value))}
                 />
@@ -283,15 +283,15 @@ export default function NewBookingPage() {
         {error ? <p className="mt-4 text-body text-red-500">{error}</p> : null}
 
         <div className="mt-6 flex flex-wrap justify-between gap-3">
-          <button type="button" className="btn-outline" onClick={back} disabled={step === 0}>
+          <button type="button" className="app-btn-secondary" onClick={back} disabled={step === 0}>
             Back
           </button>
           {step < 3 ? (
-            <button type="button" className="btn-primary" onClick={next}>
+            <button type="button" className="app-btn-primary" onClick={next}>
               Continue
             </button>
           ) : (
-            <button type="button" className="btn-primary" onClick={submit} disabled={loading}>
+            <button type="button" className="app-btn-primary" onClick={submit} disabled={loading}>
               {loading ? "Creating..." : "Proceed to payment"}
             </button>
           )}

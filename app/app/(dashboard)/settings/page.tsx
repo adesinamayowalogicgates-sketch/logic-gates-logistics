@@ -3,7 +3,19 @@
 import { useEffect, useState } from "react";
 
 export default function SettingsPage() {
-  const [form, setForm] = useState({ name: "", phone: "", company: "" });
+  const [form, setForm] = useState({
+    name: "",
+    firstName: "",
+    lastName: "",
+    gender: "",
+    dateOfBirth: "",
+    phone: "",
+    nationality: "",
+    nextOfKinName: "",
+    nextOfKinGender: "",
+    nextOfKinPhone: "",
+    company: ""
+  });
   const [status, setStatus] = useState<"idle" | "saving" | "saved" | "error">(
     "idle"
   );
@@ -15,7 +27,15 @@ export default function SettingsPage() {
       if (response.ok) {
         setForm({
           name: data?.name || "",
+          firstName: data?.firstName || "",
+          lastName: data?.lastName || "",
+          gender: data?.gender || "",
+          dateOfBirth: data?.dateOfBirth || "",
           phone: data?.phone || "",
+          nationality: data?.nationality || "",
+          nextOfKinName: data?.nextOfKinName || "",
+          nextOfKinGender: data?.nextOfKinGender || "",
+          nextOfKinPhone: data?.nextOfKinPhone || "",
           company: data?.company || ""
         });
       }
@@ -32,10 +52,15 @@ export default function SettingsPage() {
     event.preventDefault();
     setStatus("saving");
 
+    const payload = {
+      ...form,
+      name: `${form.firstName} ${form.lastName}`.trim()
+    };
+
     const response = await fetch("/api/profile", {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(form)
+      body: JSON.stringify(payload)
     });
 
     setStatus(response.ok ? "saved" : "error");
@@ -49,17 +74,54 @@ export default function SettingsPage() {
         <p className="text-body text-muted">Keep your contact details up to date.</p>
       </div>
 
-      <form className="card-base p-6 space-y-4" onSubmit={handleSubmit}>
+      <form className="app-card p-6 space-y-4" onSubmit={handleSubmit}>
         <div>
-          <label className="text-body font-semibold text-text-primary" htmlFor="name">
-            Full name
+          <label className="text-body font-semibold text-text-primary" htmlFor="firstName">
+            First name
           </label>
           <input
-            id="name"
-            name="name"
-            value={form.name}
+            id="firstName"
+            name="firstName"
+            value={form.firstName}
             onChange={handleChange}
-            className="mt-2 w-full rounded-xl border border-border-muted/30 bg-white px-4 py-3 text-body text-text-primary focus-ring"
+            className="app-input"
+          />
+        </div>
+        <div>
+          <label className="text-body font-semibold text-text-primary" htmlFor="lastName">
+            Last name
+          </label>
+          <input
+            id="lastName"
+            name="lastName"
+            value={form.lastName}
+            onChange={handleChange}
+            className="app-input"
+          />
+        </div>
+        <div>
+          <label className="text-body font-semibold text-text-primary" htmlFor="gender">
+            Gender
+          </label>
+          <input
+            id="gender"
+            name="gender"
+            value={form.gender}
+            onChange={handleChange}
+            className="app-input"
+          />
+        </div>
+        <div>
+          <label className="text-body font-semibold text-text-primary" htmlFor="dateOfBirth">
+            Date of birth
+          </label>
+          <input
+            id="dateOfBirth"
+            name="dateOfBirth"
+            type="date"
+            value={form.dateOfBirth}
+            onChange={handleChange}
+            className="app-input"
           />
         </div>
         <div>
@@ -71,7 +133,19 @@ export default function SettingsPage() {
             name="phone"
             value={form.phone}
             onChange={handleChange}
-            className="mt-2 w-full rounded-xl border border-border-muted/30 bg-white px-4 py-3 text-body text-text-primary focus-ring"
+            className="app-input"
+          />
+        </div>
+        <div>
+          <label className="text-body font-semibold text-text-primary" htmlFor="nationality">
+            Nationality
+          </label>
+          <input
+            id="nationality"
+            name="nationality"
+            value={form.nationality}
+            onChange={handleChange}
+            className="app-input"
           />
         </div>
         <div>
@@ -83,10 +157,46 @@ export default function SettingsPage() {
             name="company"
             value={form.company}
             onChange={handleChange}
-            className="mt-2 w-full rounded-xl border border-border-muted/30 bg-white px-4 py-3 text-body text-text-primary focus-ring"
+            className="app-input"
           />
         </div>
-        <button className="btn-primary" type="submit" disabled={status === "saving"}>
+        <div>
+          <label className="text-body font-semibold text-text-primary" htmlFor="nextOfKinName">
+            Next of kin name
+          </label>
+          <input
+            id="nextOfKinName"
+            name="nextOfKinName"
+            value={form.nextOfKinName}
+            onChange={handleChange}
+            className="app-input"
+          />
+        </div>
+        <div>
+          <label className="text-body font-semibold text-text-primary" htmlFor="nextOfKinGender">
+            Next of kin gender
+          </label>
+          <input
+            id="nextOfKinGender"
+            name="nextOfKinGender"
+            value={form.nextOfKinGender}
+            onChange={handleChange}
+            className="app-input"
+          />
+        </div>
+        <div>
+          <label className="text-body font-semibold text-text-primary" htmlFor="nextOfKinPhone">
+            Next of kin phone number
+          </label>
+          <input
+            id="nextOfKinPhone"
+            name="nextOfKinPhone"
+            value={form.nextOfKinPhone}
+            onChange={handleChange}
+            className="app-input"
+          />
+        </div>
+        <button className="app-btn-primary" type="submit" disabled={status === "saving"}>
           {status === "saving" ? "Saving..." : "Save changes"}
         </button>
         {status === "saved" ? (
