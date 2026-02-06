@@ -46,7 +46,7 @@ export default function RegisterPage() {
       return;
     }
 
-    router.push("/app/login?registered=true");
+    router.push(`/app/verify-otp?email=${encodeURIComponent(String(payload.email))}`);
   };
 
   return (

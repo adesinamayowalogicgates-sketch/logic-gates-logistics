@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 import { hash } from "bcryptjs";
 import { prisma } from "@/lib/prisma";
 import { registerSchema } from "@/lib/validation";
+import { generateOtp, hashOtp } from "@/lib/otp";
+import { sendOtpEmail } from "@/lib/email";
 
 export async function POST(request: Request) {
   try {
@@ -51,7 +53,23 @@ export async function POST(request: Request) {
       }
     }
 
-    return NextResponse.json({ id: user.id });
+    const otp = generateOtp();
+    const otpHash = hashOtp(otp, data.email.toLowerCase());
+    const expiresAt = new Date(Date.now() + 10 * 60 * 1000);
+
+    await prisma.emailOtp.upsert({
+      where: { email: data.email.toLowerCase() },
+      update: { otpHash, expiresAt, attempts: 0 },
+      create: {
+        email: data.email.toLowerCase(),
+        otpHash,
+        expiresAt
+      }
+    });
+
+    await sendOtpEmail({ to: data.email, otp });
+
+    return NextResponse.json({ id: user.id, requiresVerification: true });
   } catch (error: any) {
     const message = Array.isArray(error?.issues) ? error.issues[0]?.message : error.message;
     return NextResponse.json({ error: message ?? "Invalid request" }, { status: 400 });

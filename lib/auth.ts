@@ -33,6 +33,10 @@ export const authOptions: NextAuthOptions = {
           return null;
         }
 
+        if (!user.emailVerifiedAt) {
+          throw new Error("Please verify your email to continue.");
+        }
+
         const adminEmail = process.env.ADMIN_EMAIL?.toLowerCase();
         if (adminEmail && user.email.toLowerCase() === adminEmail && user.role !== "admin") {
           await prisma.user.update({
