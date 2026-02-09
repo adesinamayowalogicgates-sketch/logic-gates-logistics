@@ -14,6 +14,8 @@ export default function VerifyOtpPage() {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState<MessageState>(null);
   const [cooldown, setCooldown] = useState(0);
+  const [backoffIndex, setBackoffIndex] = useState(0);
+  const cooldownSteps = [30, 60, 120];
 
   useEffect(() => {
     const nextEmail = params.get("email") || "";
@@ -24,6 +26,20 @@ export default function VerifyOtpPage() {
   }, [params]);
 
   useEffect(() => {
+    if (!email) return;
+    const cooldownKey = `otpCooldown:${email}`;
+    const backoffKey = `otpBackoff:${email}`;
+    const storedUntil = Number(localStorage.getItem(cooldownKey));
+    if (storedUntil && storedUntil > Date.now()) {
+      setCooldown(Math.ceil((storedUntil - Date.now()) / 1000));
+    }
+    const storedBackoff = Number(localStorage.getItem(backoffKey));
+    if (!Number.isNaN(storedBackoff)) {
+      setBackoffIndex(Math.min(Math.max(0, storedBackoff), cooldownSteps.length - 1));
+    }
+  }, [email]);
+
+  useEffect(() => {
     inputRef.current?.focus();
   }, []);
 
@@ -32,6 +48,11 @@ export default function VerifyOtpPage() {
     const timer = setTimeout(() => setCooldown((c) => c - 1), 1000);
     return () => clearTimeout(timer);
   }, [cooldown]);
+
+  useEffect(() => {
+    if (!email || cooldown > 0) return;
+    localStorage.removeItem(`otpCooldown:${email}`);
+  }, [cooldown, email]);
 
   const handleVerify = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -73,12 +94,18 @@ export default function VerifyOtpPage() {
       const retryAfter = Number(data?.retryAfter || 0);
       if (retryAfter > 0) {
         setCooldown(retryAfter);
+        localStorage.setItem(`otpCooldown:${email}`, String(Date.now() + retryAfter * 1000));
       }
       setMessage({ type: "error", text: data?.error || "Unable to resend code." });
       return;
     }
 
-    setCooldown(60);
+    const nextDuration = cooldownSteps[backoffIndex] ?? cooldownSteps[cooldownSteps.length - 1];
+    const nextIndex = Math.min(backoffIndex + 1, cooldownSteps.length - 1);
+    setBackoffIndex(nextIndex);
+    localStorage.setItem(`otpBackoff:${email}`, String(nextIndex));
+    setCooldown(nextDuration);
+    localStorage.setItem(`otpCooldown:${email}`, String(Date.now() + nextDuration * 1000));
     setMessage({ type: "success", text: "A new code has been sent." });
   };
 

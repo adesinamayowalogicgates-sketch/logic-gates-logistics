@@ -21,6 +21,10 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Too many attempts" }, { status: 429 });
     }
 
+    if (record.usedAt) {
+      return NextResponse.json({ error: "OTP already used" }, { status: 400 });
+    }
+
     if (record.expiresAt < new Date()) {
       return NextResponse.json({ error: "OTP expired" }, { status: 400 });
     }
@@ -39,7 +43,10 @@ export async function POST(request: Request) {
       data: { emailVerifiedAt: new Date() }
     });
 
-    await prisma.emailOtp.delete({ where: { email } });
+    await prisma.emailOtp.update({
+      where: { email },
+      data: { usedAt: new Date() }
+    });
 
     return NextResponse.json({ status: "ok" });
   } catch (error: any) {

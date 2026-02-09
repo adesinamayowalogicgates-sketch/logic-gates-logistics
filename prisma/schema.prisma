@@ -90,4 +90,15 @@ model EmailOtp {
   expiresAt DateTime
   attempts  Int      @default(0)
   createdAt DateTime @default(now())
+  usedAt    DateTime?
+}
+
+model EmailOtpSend {
+  id        String   @id @default(cuid())
+  email     String
+  ip        String
+  createdAt DateTime @default(now())
+
+  @@index([email, createdAt])
+  @@index([ip, createdAt])
 }
