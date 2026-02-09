@@ -14,7 +14,11 @@ export async function POST(request: Request) {
 
     const record = await prisma.emailOtp.findUnique({ where: { email } });
     if (record && Date.now() - record.createdAt.getTime() < 60_000) {
-      return NextResponse.json({ error: "Please wait before requesting a new code." }, { status: 429 });
+      const retryAfter = Math.max(1, Math.ceil((60_000 - (Date.now() - record.createdAt.getTime())) / 1000));
+      return NextResponse.json(
+        { error: "Please wait before requesting a new code.", retryAfter },
+        { status: 429, headers: { "Retry-After": String(retryAfter) } }
+      );
     }
 
     const otp = generateOtp();

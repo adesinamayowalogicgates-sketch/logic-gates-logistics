@@ -1,20 +1,31 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
+
+type MessageState = { type: "error" | "success"; text: string } | null;
 
 export default function VerifyOtpPage() {
   const params = useSearchParams();
   const router = useRouter();
+  const inputRef = useRef<HTMLInputElement | null>(null);
   const [otp, setOtp] = useState("");
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState<string | null>(null);
+  const [message, setMessage] = useState<MessageState>(null);
   const [cooldown, setCooldown] = useState(0);
 
   useEffect(() => {
-    setEmail(params.get("email") || "");
+    const nextEmail = params.get("email") || "";
+    setEmail(nextEmail);
+    if (!nextEmail) {
+      setMessage({ type: "error", text: "Missing email. Please return to registration and try again." });
+    }
   }, [params]);
+
+  useEffect(() => {
+    inputRef.current?.focus();
+  }, []);
 
   useEffect(() => {
     if (cooldown <= 0) return;
@@ -37,7 +48,7 @@ export default function VerifyOtpPage() {
     setLoading(false);
 
     if (!response.ok) {
-      setMessage(data?.error || "Unable to verify code.");
+      setMessage({ type: "error", text: data?.error || "Unable to verify code." });
       return;
     }
 
@@ -59,12 +70,16 @@ export default function VerifyOtpPage() {
     setLoading(false);
 
     if (!response.ok) {
-      setMessage(data?.error || "Unable to resend code.");
+      const retryAfter = Number(data?.retryAfter || 0);
+      if (retryAfter > 0) {
+        setCooldown(retryAfter);
+      }
+      setMessage({ type: "error", text: data?.error || "Unable to resend code." });
       return;
     }
 
     setCooldown(60);
-    setMessage("A new code has been sent.");
+    setMessage({ type: "success", text: "A new code has been sent." });
   };
 
   return (
@@ -89,12 +104,20 @@ export default function VerifyOtpPage() {
             maxLength={6}
             required
             value={otp}
-            onChange={(event) => setOtp(event.target.value.replace(/\D/g, ""))}
+            ref={inputRef}
+            onChange={(event) => {
+              if (message) setMessage(null);
+              setOtp(event.target.value.replace(/\D/g, ""));
+            }}
             className="app-input"
           />
         </div>
-        {message ? <p className="text-body text-red-500">{message}</p> : null}
-        <button className="app-btn-primary w-full" type="submit" disabled={loading}>
+        {message ? (
+          <p className={`text-body ${message.type === "error" ? "text-red-500" : "text-emerald-600"}`}>
+            {message.text}
+          </p>
+        ) : null}
+        <button className="app-btn-primary w-full" type="submit" disabled={loading || otp.length !== 6 || !email}>
           {loading ? "Verifying..." : "Verify"}
         </button>
       </form>
@@ -104,7 +127,7 @@ export default function VerifyOtpPage() {
           type="button"
           className="app-btn-secondary w-full"
           onClick={handleResend}
-          disabled={loading || cooldown > 0}
+          disabled={loading || cooldown > 0 || !email}
         >
           {cooldown > 0 ? `Resend in ${cooldown}s` : "Resend code"}
         </button>

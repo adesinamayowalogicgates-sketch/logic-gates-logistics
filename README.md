@@ -5,11 +5,16 @@
 ```bash
 npm install
 npx prisma generate
-npx prisma db push
 npm run dev
 ```
 
 Then open `http://localhost:3000`.
+
+## Database setup (Supabase)
+
+- Do not run `prisma db push` (port 5432 is blocked on the network).
+- Apply schema changes via Supabase SQL Editor:
+  - Run `supabase/sql/add_email_otp.sql` to create the Email OTP table + `emailVerifiedAt`.
 
 ## Customer app
 
@@ -38,6 +43,8 @@ Copy `.env.example` to `.env` and fill in values:
 - `PAYSTACK_SECRET_KEY` and `PAYSTACK_PUBLIC_KEY`
 - `NEXT_PUBLIC_APP_URL`
 - `ADMIN_EMAIL` (optional, promotes the matching account to admin on login)
+- `RESEND_API_KEY` and `FROM_EMAIL` (email OTP)
+- `OTP_SALT` (optional, defaults to `logic-gates-otp`)
 
 ## Wallet testing
 

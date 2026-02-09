@@ -15,7 +15,11 @@ export async function middleware(request: NextRequest) {
       secret: process.env.NEXTAUTH_SECRET || process.env.AUTH_SECRET
     });
 
-    if (pathname.startsWith("/app/login") || pathname.startsWith("/app/register")) {
+    if (
+      pathname.startsWith("/app/login") ||
+      pathname.startsWith("/app/register") ||
+      pathname.startsWith("/app/verify-otp")
+    ) {
       if (token) {
         const url = request.nextUrl.clone();
         url.pathname = "/app/dashboard";
